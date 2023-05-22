@@ -188,7 +188,7 @@
 
       const totalQuestions = questions.length;
       const percentage = (score / totalQuestions) * 100;
-      const iq = Math.round((percentage / 100) * 150 + 50);
+      const iq = Math.round((percentage / 100) * 150 + 0);
 
       resultContainer.textContent = `Правильных ответов: ${score}/${totalQuestions}. Ваш IQ: ${iq}`;
     }

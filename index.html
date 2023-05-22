@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>IQ Тест</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+  
+      h1 {
+        text-align: center;
+      }
+  
+      .question {
+        margin-bottom: 10px;
+      }
+  
+      .options label {
+        display: block;
+        margin-bottom: 5px;
+      }
+  
+      #submit-btn {
+        margin-top: 10px;
+        text-align: center;
+      }
+  
+      #result {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+    </style>
+</head>
+<body>
+  <h1>IQ Тест</h1>
+  <form id="quiz-form">
+    <div id="questions-container"></div>
+    <div id="submit-btn">
+      <button onclick="window.location.href = '#result'" type="submit">Проверить результаты</button>
+    </div>
+  </form>
+  <div id="result"></div>
+  <script>
+    const questions = [
+      {
+        question: "Задача: Какое число продолжает данную последовательность 2, 5, 10, 17, 26, ...?",
+        options: ["37", "38", "39", "40"],
+        answer: 0
+      },
+      {
+        question: "Какие два числа в этой последовательности связаны общим правилом? 3, 8, 15, 24, 35, ...",
+        options: ["3 и 15", "8 и 35", "24 и 35", "15 и 24"],
+        answer: 2
+      },
+      {
+        question: "Какая фигура продолжает данную последовательность □ ▲ ■ ◊ □ ▲ ■ ◊ □ ▲ ■ ◊ ...?",
+        options: ["▲", "■", "◊", "□"],
+        answer: 1
+      },
+      {
+        question: "Какая буква должна идти следующей в данной последовательности A, C, F, J, ...?",
+        options: ["M", "N", "O", "P"],
+        answer: 2
+      },
+      {
+        question: "Если ВСЕ луны Юпитера являются спутниками, а НЕКОТОРЫЕ спутники это астероиды, то следующее утверждение верно?",
+        options: ["Все спутники Юпитера - астероиды.", "Некоторые луны Юпитера - астероиды.", "Все астероиды - луны Юпитера.", "Все астероиды - спутники Юпитера."],
+        answer: 1
+      },
+      {
+        question: "Какой из следующих числовых рядов является простым квадратом чисел?",
+        options: ["2, 4, 9, 16, 25", "3, 6, 9, 12, 15", "1, 3, 5, 7, 9", "2, 6, 12, 20, 30"],
+        answer: 0
+      },
+      {
+        question: "Какое слово не соответствует остальным в данной группе?",
+        options: ["Шахматы", "Шашки", "Го", "Бридж"],
+        answer: 3
+      },
+      {
+        question: "Какое слово продолжает логическую последовательность Роса, Туман, Искра, ...?",
+        options: ["Огонь", "Лёд", "Брызги", "Пыль"],
+        answer: 0
+      },
+      {
+        question: "Какая буква следует следующей в данной последовательности A, C, F, J, O, ...?",
+        options: ["S", "P", "T", "U"],
+        answer: 1
+      },
+      {
+        question: "Если 6 котов могут поймать 6 мышей за 6 минут, сколько времени понадобится 10 котам, чтобы поймать 10 мышей?",
+        options: ["6 минут", "10 минут", "15 минут", "20 минут"],
+        answer: 0
+      },
+      {
+        question: " Какое число должно идти следующим в данной последовательности 3, 10, 21, 36, ...?",
+        options: ["48", "50", "54", "58"],
+        answer: 2
+      },
+      {
+        question: "Если ВСЕ птицы - животные, и НЕКОТОРЫЕ птицы не могут летать, то следующее утверждение верно?",
+        options: ["Все животные могут летать.", "Некоторые животные - птицы.", "Все птицы не могут летать.", "Некоторые животные не могут летать."],
+        answer: 3
+      },
+      {
+        question: "Какой из следующих рядов чисел продолжает данную последовательность 2, 5, 10, 17, 26, ...?",
+        options: ["36, 49, 64, 81", "37, 44, 51, 58", "28, 34, 40, 46", "31, 33, 37, 41"],
+        answer: 1
+      },
+      {
+        question: "Вам дано слово 'OPENAI', которое нужно зашифровать с помощью замены каждой буквы на следующую в алфавите. Какое слово получится?",
+        options: ["PPFOBJ", "PQFOBJ", "OQQFBI", "OQFOBI"],
+        answer: 3
+      },
+      {
+        question: "Если все блузки синие, а некоторые блузки имеют рукава, то какой из следующих утверждений является истинным?",
+        options: ["Все блузки с рукавами синие.", "Некоторые синие блузки имеют рукава.", "Все синие блузки имеют рукава.", "Ни одно из вышеперечисленных утверждений не является истинным."],
+        answer: 1
+      },
+      {
+        question: "Какое из следующих государств не граничит с Россией?",
+        options: ["Китай", "Финляндия", "Монголия", "Казахстан"],
+        answer: 1
+      },
+      {
+        question: "Вам показывается ряд символов: 'ABCDABCDABCD'. После этого символы исчезают, и вам нужно в точности восстановить эту последовательность символов. Какая последовательность правильна?",
+        options: ["ABCDABCDABCD", "ABCDABDABCD", "ABDCABCDABCD", "ABCDACBDABCD"],
+        answer: 2
+      },
+      {
+        question: "В каком из следующих слов нет повторяющихся букв?",
+        options: ["Трансформатор", "Прогноз", "Фантастика", "Белка"],
+        answer: 3
+      },
+      {
+        question: "Сколько существует возможных различных комбинаций первых ходов для белых фигур в шахматах?",
+        options: ["16", "20", "36", "40"],
+        answer: 2
+      },
+      {
+        question: "Среди следующих утверждений, какое является противоречивым?",
+        options: ["Все птицы имеют крылья.", "Некоторые птицы не могут летать.", "Все птицы являются хищниками.", "Некоторые птицы плавают."],
+        answer: 1
+      },
+      // Добавьте остальные вопросы здесь...
+    ];
+
+    const quizForm = document.getElementById("quiz-form");
+    const questionsContainer = document.getElementById("questions-container");
+    const resultContainer = document.getElementById("result");
+
+    function displayQuestions() {
+      questions.forEach((q, index) => {
+        const questionDiv = document.createElement("div");
+        questionDiv.className = "question";
+        questionDiv.innerHTML = `<strong>${q.question}</strong>`;
+
+        const optionsDiv = document.createElement("div");
+        optionsDiv.className = "options";
+
+        q.options.forEach((option, optionIndex) => {
+          const label = document.createElement("label");
+          label.innerHTML = `<input type="radio" name="question${index}" value="${optionIndex}"> ${option}`;
+          optionsDiv.appendChild(label);
+        });
+
+        questionDiv.appendChild(optionsDiv);
+        questionsContainer.appendChild(questionDiv);
+      });
+    }
+
+    function calculateIQ() {
+      let score = 0;
+
+      questions.forEach((q, index) => {
+        const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+
+        if (selectedOption) {
+          const selectedAnswer = parseInt(selectedOption.value);
+          if (selectedAnswer === q.answer) {
+            score++;
+          }
+        }
+      });
+
+      const totalQuestions = questions.length;
+      const percentage = (score / totalQuestions) * 100;
+      const iq = Math.round((percentage / 100) * 150 + 50);
+
+      resultContainer.textContent = `Правильных ответов: ${score}/${totalQuestions}. Ваш IQ: ${iq}`;
+    }
+
+    displayQuestions();
+
+    quizForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+      calculateIQ();
+    });
+  </script>
+</body>
+</html>
